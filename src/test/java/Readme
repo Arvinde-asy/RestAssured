@@ -1,0 +1,13 @@
+
+        /* Another way to call ApI and validate response in Rest assured
+        RequestSpecification RS = RestAssured.given();
+        Response response = RS.get("https://dummy.restapiexample.com/api/v1/employees");
+        ValidatableResponse VR = response.then();
+        response.prettyPrint();
+        VR.statusCode(200);
+        */
+
+        // Way to Set Query Parameter
+        //Map<String,Object> params =  new HashMap<String,Object>();
+        //params.put("Arvind","Handsome");
+        //params.put("K","v");
