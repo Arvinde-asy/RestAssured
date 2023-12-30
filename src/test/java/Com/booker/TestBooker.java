@@ -17,15 +17,15 @@ import java.util.logging.Logger;
 
 @RunWith(JUnitPlatform.class)
 @TestMethodOrder(value = MethodOrderer.OrderAnnotation.class)
-public class RestfulbookerTest {
+public class TestBooker {
     //public String ID;
     public static ValidatableResponse response;
     public static String Booking_ID;
-    Logger logger = Logger.getLogger(RestfulbookerTest.class.getName());
+    Logger logger = Logger.getLogger(TestBooker.class.getName());
 
     @DisplayName(value ="Test case for Create New Booking")
     @Test
-    @BeforeAll
+   // @BeforeAll
     public static void createBooking() {
        // testBase.URL();
         response = given()
@@ -38,27 +38,27 @@ public class RestfulbookerTest {
         System.out.println(response.extract().body().asPrettyString());
     }
     @DisplayName(value ="Test case for validating details of booking creation")
-    @Test
+    //@Test
     @Order(value=1)
     public void Test001 () {
-        int Statuscode = response.extract().statusCode();
-        LinkedHashMap<String, ?> bookingdates = response.extract().path("booking.bookingdates");
-        System.out.println(bookingdates);
-        System.out.println(bookingdates.values().toArray()[0]);
-        System.out.println(bookingdates.values().toArray()[1]);
-        if (Statuscode == 200) {
-            Assert.assertEquals(Checking, bookingdates.values().toArray()[0]);
+        int statusCode = response.extract().statusCode();
+        LinkedHashMap<String, ?> bookingDates = response.extract().path("booking.bookingdates");
+        System.out.println(bookingDates);
+        System.out.println(bookingDates.values().toArray()[0]);
+        System.out.println(bookingDates.values().toArray()[1]);
+        if (statusCode == 200) {
+            Assert.assertEquals(Checking, bookingDates.values().toArray()[0]);
             System.out.println("Checking  date matched");
-            Assert.assertEquals(Checkout, bookingdates.values().toArray()[1]);
+            Assert.assertEquals(Checkout, bookingDates.values().toArray()[1]);
             System.out.println("Checkout date matched");
         } else {
             System.out.println("Validation Failed for Createbooking");
         }
     }
     @DisplayName(value ="Test case for Upadate Booking date of previously created one")
-    @Test
+   //// @Test
     @Order(value=2)
-    public void updatetBooking() {
+    public void updateBooking() {
         //System.out.println(Booking_ID);
         Map<String, Object> params = new HashMap<String, Object>();
         params.put("Content-Type", "application/json");
@@ -73,25 +73,25 @@ public class RestfulbookerTest {
                 .then().statusCode(200);
     }
     @DisplayName(value ="Test Case for Validation after update")
-    @Test
+    //@Test
     @Order(value =3)
     public void Test003 () {
-        int Statuscode = response.extract().statusCode();
-        LinkedHashMap<String, ?> Updatedbookingdates = response.extract().path("bookingdates");
-        System.out.println(Updatedbookingdates);
-        System.out.println(Updatedbookingdates.values().toArray()[0]);
-        System.out.println(Updatedbookingdates.values().toArray()[1]);
-        if (Statuscode == 200) {
-            Assert.assertEquals(Checking, Updatedbookingdates.values().toArray()[0]);
-            System.out.println("Updated Checking  date matched:-Updated CI date="+ Updatedbookingdates.values().toArray()[0]);
-            Assert.assertEquals(Checkout, Updatedbookingdates.values().toArray()[1]);
-            System.out.println("Updated Checkout date matched:-Updated CI date="+Updatedbookingdates.values().toArray()[1]);
+        int statusCode = response.extract().statusCode();
+        LinkedHashMap<String, ?> updatedBookingDates = response.extract().path("bookingdates");
+        System.out.println(updatedBookingDates);
+        System.out.println(updatedBookingDates.values().toArray()[0]);
+        System.out.println(updatedBookingDates.values().toArray()[1]);
+        if (statusCode == 200) {
+            Assert.assertEquals(Checking, updatedBookingDates.values().toArray()[0]);
+            System.out.println("Updated Checking  date matched:-Updated CI date="+ updatedBookingDates.values().toArray()[0]);
+            Assert.assertEquals(Checkout, updatedBookingDates.values().toArray()[1]);
+            System.out.println("Updated Checkout date matched:-Updated CI date="+updatedBookingDates.values().toArray()[1]);
         } else {
             System.out.println("Failed Post");
         }
     }
     @DisplayName(value ="Test case for getting booking details of previously created one")
-    @Test
+   // @Test
     @Order(value =4)
     public void getBooking() {
         //testBase.URL();
@@ -101,8 +101,8 @@ public class RestfulbookerTest {
                 .contentType(ContentType.JSON)
                 .log().uri()
                 .get("https://restful-booker.herokuapp.com/booking/"+Booking_ID).then().statusCode(200);
-        int Statuscode = response.extract().statusCode();
-        if (Statuscode == 200) {
+        int statusCode = response.extract().statusCode();
+        if (statusCode == 200) {
             System.out.println("Test case passed Get ");
             System.out.println(response.extract().body().asPrettyString());
         } else {

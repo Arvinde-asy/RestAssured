@@ -7,17 +7,17 @@ import static com.main.Utilities.*;
 public class Payload {
      public static JSONObject postLoad ()
     {
-        JSONObject bookingdates = new JSONObject();
-        bookingdates.put("checkin",checkingDate());
-        bookingdates.put("checkout",checkoutDate());
+        JSONObject bookingDates = new JSONObject();
+        bookingDates.put("checkin",checkingDate());
+        bookingDates.put("checkout",checkoutDate());
 
         Faker fake = new Faker();
         JSONObject payload = new JSONObject();
-        payload.put ("firstname",fake.name().firstName());
-        payload.put ("lastname",fake.name().lastName());
+        payload.put ("firstname",generateFirstName());
+        payload.put ("lastname",generateLastName());
         payload.put ("totalprice",fake.random().nextInt(3));
         payload.put ("depositpaid","true");
-        payload.put("bookingdates",bookingdates);
+        payload.put("bookingdates",bookingDates);
         payload.put("additionalneeds","Lunch");
         return payload;
         }
@@ -25,16 +25,16 @@ public class Payload {
     {
         Faker fake = new Faker();
         String Check = fake.date().toString();
-        JSONObject bookingdates = new JSONObject();
-        bookingdates.put("checkin",checkingDate());
-        bookingdates.put("checkout",checkoutDate());
+        JSONObject bookingDates = new JSONObject();
+        bookingDates.put("checkin",checkingDate());
+        bookingDates.put("checkout",checkoutDate());
 
         JSONObject payload = new JSONObject();
-        payload.put ("firstname",fake.name().firstName());
-        payload.put ("lastname",fake.name().lastName());
+        payload.put ("firstname",generateFirstName());
+        payload.put ("lastname",generateLastName());
         payload.put ("totalprice",fake.random().nextInt(3));
         payload.put ("depositpaid","true");
-        payload.put("bookingdates",bookingdates);
+        payload.put("bookingdates",bookingDates);
         payload.put("additionalneeds","Lunch");
         return payload;
     }
